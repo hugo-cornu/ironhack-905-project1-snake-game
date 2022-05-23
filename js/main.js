@@ -1,6 +1,5 @@
 const gridContainer = document.querySelector(".grid");
 
-
 class GameBoard {
   constructor(width, height) {
     this.width = width;
@@ -25,53 +24,63 @@ class GameBoard {
 
       allCells.push(oneCell);
     }
-    return allCells
+    return allCells;
   }
 }
 
 const board = new GameBoard(10, 10);
 
-
 class Snake {
-    constructor() {
-      this.snakePosition = [board.allCells[44], board.allCells[45]];
-    }
-  
-    draw() {
-        this.snakePosition.forEach((cell) => {
-            cell.classList.add("snake")
-        })
-    }
-  
-  //   move(direction) {
-  
-  //   }
+  constructor() {
+    this.initialPosition = 55;
   }
-  
-  const snake = new Snake()
-  snake.draw()
-  
-  
-  document.addEventListener("keydown", (e) => {
-      console.log("yo")
-    switch (e.code) {
-      case "arrowLeft":
-        snake.move("left");
-        break;
-      case "arrowRight":
-        snake.move("right");
-        break;
-      case "arrowUp":
-        snake.move("up");
-        break;
-        case "arrowDown":
-        snake.move("down")
-        break
+
+  drawSnake() {
+    board.allCells[this.initialPosition].classList.add("snake");
+  }
+
+  hideLastPosition() {
+      
+  }
+
+  move(direction) {
+    if (direction === "right") {
+      this.initialPosition += 1;
+      this.drawSnake();
+    } else if (direction === "left") {
+      this.initialPosition -= 1;
+      this.drawSnake();
+    } else if (direction === "up") {
+      this.initialPosition -= board.width;
+      this.drawSnake();
+    } else if (direction === "down") {
+      this.initialPosition += board.width;
+      this.drawSnake();
     }
-  });
-  
+  }
+}
+
+const snake = new Snake();
+snake.drawSnake();
+
+window.addEventListener("keydown", (e) => {
+  switch (e.code) {
+    case "ArrowLeft":
+      console.log("left");
+      snake.move("left");
+      break;
+    case "ArrowRight":
+      snake.move("right");
+      break;
+    case "ArrowUp":
+      snake.move("up");
+      break;
+    case "ArrowDown":
+      snake.move("down");
+      break;
+  }
+});
+
 //   // Set a direction
 //   // Snake should not able able to go right or left if the direction is right or left
 //   // Snake expension
-//   // 
-
