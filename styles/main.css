@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -12,11 +12,10 @@ html {
   flex-wrap: wrap;
   width: 602px;
   height: 600px;
-
 }
 
 .grid.hide {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .cell {
@@ -26,10 +25,13 @@ html {
   background-repeat: no-repeat;
   width: 60px;
   height: 60px;
-
 }
 
 .snake {
+  background-color: blue;
+}
+
+.snake-head {
   background-color: blue;
 }
 

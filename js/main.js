@@ -1,7 +1,10 @@
 const gridContainer = document.querySelector(".grid");
 let gameOver = false;
+let score = 0;
 
 // //FUNCTION START THE GAME
+
+// ---------------------------- GAMEBOARD CLASS ------------------------------------ //
 
 class GameBoard {
   constructor(width, height) {
@@ -33,16 +36,24 @@ class GameBoard {
 
 const board = new GameBoard(10, 10);
 
+// ---------------------------- SNAKE CLASS ------------------------------------ //
+
 class Snake {
   constructor() {
-    this.snakePositions = [55, 56, 57];
+    this.snakePositions = [51, 52, 53];
     this.snakeHeadPosition = this.snakePositions.slice(-1)[0];
+    this.tailPosition = this.snakePositions[0];
     this.direction = "right";
+  }
+
+  getSnakeWithoutHead() {
+    console.log("yo,", this.snakePositions.slice(0, -1));
+    return this.snakePositions.slice(0, -1);
   }
 
   drawSnake() {
     this.snakePositions.forEach((index) => {
-      board.allCells[index].classList.add("snake");
+      board.allCells[index]?.classList.add("snake");
     });
   }
 
@@ -52,7 +63,7 @@ class Snake {
   }
 
   move() {
-    console.log(this.direction);
+    checkForGameOver();
     if (this.direction === "right") {
       this.snakeHeadPosition += 1;
       this.snakePositions.push(this.snakeHeadPosition);
@@ -74,26 +85,104 @@ class Snake {
       this.drawSnake();
       this.hideLastPosition();
     }
+    this.checkForFood();
+  }
+
+  checkForFood() {
+    if (this.snakeHeadPosition === food.position) {
+      food.hide();
+      food.generateNew();
+      score += 1;
+      this.snakePositions.unshift(this.tailPosition);
+    }
   }
 }
 
 const snake = new Snake();
 // snake.drawSnake() -> When start the game it needs to appears.
 
+// ---------------------------- FOOD CLASS ------------------------------------ //
+
+class Food {
+  constructor() {
+    this.position = null;
+    this.generateNew();
+  }
+
+  foodRandomPosition() {
+    const unoccupiedCells = board.allCells.filter((cell) => {
+        return !cell.classList.contains("snake")
+    })
+    // const unoccupiedCells = board.allCells.filter((cell) => {
+    //     return !snake.snakePositions.includes(cell)
+    // })
+    console.log(unoccupiedCells)
+    return unoccupiedCells[Math.floor(Math.random() * unoccupiedCells.length)];
+    // return Math.floor(Math.random() * board.allCells.length);
+  }
+
+  draw() {
+    board.allCells[this.position].classList.add("food");
+  }
+
+  hide() {
+    board.allCells[this.position].classList.remove("food");
+  }
+
+  generateNew() {
+    this.position = this.foodRandomPosition();
+    this.draw();
+  }
+}
+
+const food = new Food();
+food.draw(); // Should be called when the game starts
+
+// ----------------------------            ------------------------------------ //
+
 const intervalId = setInterval(() => {
   snake.move();
-}, 1000);
+}, 200);
 
-function CheckForGameOver() {
+function checkForGameOver() {
+  // Check when the snake reach the border
+  const isUp =
+    snake.direction === "up" && snake.snakeHeadPosition - board.width < 0;
+  const isDown =
+    snake.direction === "down" &&
+    snake.snakeHeadPosition + board.width > board.width * board.height;
+  const isRight =
+    snake.direction === "right" &&
+    (snake.snakeHeadPosition + 1) % board.width === 0;
+  const isLeft =
+    snake.direction === "left" && snake.snakeHeadPosition % board.width === 0;
+
   if (
-    (snake.direction === "up" && snake.snakeHeadPosition < 0) || // snake reached the top of the grid
-    2 || // snake reaches the right side of the grid
-    3 || // snake reaches the left side of the grid
-    (snake.direction === "down" && snake.snakeHeadPosition > board.gridSize)
+    isUp || // snake reached the top of the grid
+    isRight || // snake reaches the right side of the grid
+    isLeft || // snake reaches the left side of the grid
+    isDown // snake reached the bottom of the grid
   ) {
-    gameOver = true;
-  } // snake reached the bottom of the grid
+    gridContainer.classList.add("hide");
+    return clearInterval(intervalId);
+  }
+
+  // Check if the snake reach its tail
+  if (
+    snake.getSnakeWithoutHead().find((cell) => {
+      return cell === snake.snakeHeadPosition;
+    })
+  ) {
+    gridContainer.classList.add("hide");
+    return clearInterval(intervalId);
+  }
 }
+
+// snake.getSnakeWithoutHead().forEach((index) => {
+//   return board.allCells[index].classList.contains("snake");
+// })
+
+// ---------------------------- EVENTS LISTENER ------------------------------------ //
 
 window.addEventListener("keydown", (e) => {
   switch (e.code) {
@@ -118,19 +207,11 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-// if (currentPosition % gridWidth === gridWidth - 1) {
-//     break}
+// TO-DO
+// 2.a - Get the food position randomly outside SnakeArray
 
-//   // Set a direction
-//   // Snake should not able able to go right or left if the direction is right or left
-//
-//   // Snake expension
-
-// FOR TOMORROW
-// 1. Make the snake move alone
-// 2. Get the food position randomly
-// 3. When the snake eats the food -> Expend + 1 && recall the random function
-// 4. Set a un score and increment it when the food is eaten.
+// OPITMISATIONS
+// Clean the code (snake.snakePositon for example)
 
 // 11:00 -> https://www.youtube.com/watch?v=rui2tRRVtc0 ALL CONDITIONS
 // https://www.youtube.com/watch?v=TAmYp4jKWoM
