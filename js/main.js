@@ -1,4 +1,5 @@
 const gridContainer = document.querySelector(".grid");
+let gameOver = false;
 
 // //FUNCTION START THE GAME
 
@@ -79,19 +80,37 @@ class Snake {
 const snake = new Snake();
 // snake.drawSnake() -> When start the game it needs to appears.
 
+const intervalId = setInterval(() => {
+  snake.move();
+}, 1000);
+
+function CheckForGameOver() {
+  if (
+    (snake.direction === "up" && snake.snakeHeadPosition < 0) || // snake reached the top of the grid
+    2 || // snake reaches the right side of the grid
+    3 || // snake reaches the left side of the grid
+    (snake.direction === "down" && snake.snakeHeadPosition > board.gridSize)
+  ) {
+    gameOver = true;
+  } // snake reached the bottom of the grid
+}
+
 window.addEventListener("keydown", (e) => {
-  // IL FAUT ICI MODIFIER POUR ENVOYER L'INFO DANS LE SETINTERVAL
   switch (e.code) {
     case "ArrowLeft":
+      if (snake.direction === "left" || snake.direction === "right") break;
       snake.direction = "left";
       break;
     case "ArrowRight":
+      if (snake.direction === "left" || snake.direction === "right") break;
       snake.direction = "right";
       break;
     case "ArrowUp":
+      if (snake.direction === "up" || snake.direction === "down") break;
       snake.direction = "up";
       break;
     case "ArrowDown":
+      if (snake.direction === "up" || snake.direction === "down") break;
       snake.direction = "down";
       break;
     default:
@@ -116,9 +135,3 @@ window.addEventListener("keydown", (e) => {
 // 11:00 -> https://www.youtube.com/watch?v=rui2tRRVtc0 ALL CONDITIONS
 // https://www.youtube.com/watch?v=TAmYp4jKWoM
 // https://www.youtube.com/watch?v=QTcIXok9wNY
-
-const intervalId = setInterval(() => {
-    snake.move()
-}, 1000);
-
-function gameOver() {}

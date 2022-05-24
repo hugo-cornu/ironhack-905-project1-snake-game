@@ -15,6 +15,10 @@ html {
 
 }
 
+.grid.hide {
+    visibility: hidden;
+}
+
 .cell {
   color: white;
   border: 1px solid white;
