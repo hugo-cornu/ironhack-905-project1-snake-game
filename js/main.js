@@ -47,7 +47,6 @@ class Snake {
   }
 
   getSnakeWithoutHead() {
-    console.log("yo,", this.snakePositions.slice(0, -1));
     return this.snakePositions.slice(0, -1);
   }
 
@@ -89,7 +88,7 @@ class Snake {
   }
 
   checkForFood() {
-    if (this.snakeHeadPosition === food.position) {
+    if (this.snakeHeadPosition === Number(food.position.dataset.index)) {
       food.hide();
       food.generateNew();
       score += 1;
@@ -99,7 +98,7 @@ class Snake {
 }
 
 const snake = new Snake();
-// snake.drawSnake() -> When start the game it needs to appears.
+snake.drawSnake();
 
 // ---------------------------- FOOD CLASS ------------------------------------ //
 
@@ -111,22 +110,19 @@ class Food {
 
   foodRandomPosition() {
     const unoccupiedCells = board.allCells.filter((cell) => {
-        return !cell.classList.contains("snake")
-    })
-    // const unoccupiedCells = board.allCells.filter((cell) => {
-    //     return !snake.snakePositions.includes(cell)
-    // })
-    console.log(unoccupiedCells)
+      return !cell.classList.contains("snake");
+    });
+
     return unoccupiedCells[Math.floor(Math.random() * unoccupiedCells.length)];
-    // return Math.floor(Math.random() * board.allCells.length);
   }
 
   draw() {
-    board.allCells[this.position].classList.add("food");
+    this.position.classList.add("food");
   }
 
   hide() {
-    board.allCells[this.position].classList.remove("food");
+    this.position.classList.remove("food");
+    // board.allCells[this.position].classList.remove("food");
   }
 
   generateNew() {
@@ -136,13 +132,13 @@ class Food {
 }
 
 const food = new Food();
-food.draw(); // Should be called when the game starts
+// food.draw(); // Should be called when the game starts
 
 // ----------------------------            ------------------------------------ //
 
 const intervalId = setInterval(() => {
   snake.move();
-}, 200);
+}, 350);
 
 function checkForGameOver() {
   // Check when the snake reach the border
@@ -177,10 +173,6 @@ function checkForGameOver() {
     return clearInterval(intervalId);
   }
 }
-
-// snake.getSnakeWithoutHead().forEach((index) => {
-//   return board.allCells[index].classList.contains("snake");
-// })
 
 // ---------------------------- EVENTS LISTENER ------------------------------------ //
 
