@@ -1,4 +1,5 @@
 const gridContainer = document.querySelector(".grid");
+const yourScore = document.querySelector("#your-score-number")
 let gameOver = false;
 let score = 0;
 
@@ -32,9 +33,17 @@ class GameBoard {
     }
     return allCells;
   }
+
+  incrementLiveScore() {
+      yourScore.textContent = score
+  }
 }
 
 const board = new GameBoard(10, 10);
+
+function incrementLiveScore() {
+    yourScore.textContent = score
+}
 
 // ---------------------------- SNAKE CLASS ------------------------------------ //
 
@@ -92,6 +101,7 @@ class Snake {
       food.hide();
       food.generateNew();
       score += 1;
+      board.incrementLiveScore()
       this.snakePositions.unshift(this.tailPosition);
     }
   }
@@ -138,7 +148,7 @@ const food = new Food();
 
 const intervalId = setInterval(() => {
   snake.move();
-}, 350);
+}, 500);
 
 function checkForGameOver() {
   // Check when the snake reach the border

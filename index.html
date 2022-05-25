@@ -5,12 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
 
   <body>
-    <div class="grid"></div>
-    
+    <main>
+      <div>RESTART</div>
+      <div class="grid"></div>
+      <div class="your-score">
+        <div id="#your-score-text">SCORE</div>
+        <div id="your-score-number">00</div>
+      </div>
+    </main>
+
+    <footer>
+      <div id="footer-snake" class="page-style">SNAKE</div>
+      <div id="footer-author" class="page-style">by Hugo</div>
+    </footer>
     <script src="./js/food.js"></script>
     <script src="./js/snake.js"></script>
     <script src="./js/main.js"></script>
