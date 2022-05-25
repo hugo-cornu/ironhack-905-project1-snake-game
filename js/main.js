@@ -2,6 +2,7 @@
 const gridContainer = document.querySelector(".grid");
 const yourScore = document.querySelector("#your-score-number");
 const startButton = document.querySelector("#start-btn");
+const restartButton = document.querySelector("#restart-btn");
 const startScreen = document.querySelector(".start-screen");
 const gameScreen = document.querySelector("main");
 const gameOverScreen = document.querySelector(".game-over-screen");
@@ -42,13 +43,24 @@ class GameBoard {
     startScreen.style.visibility = "hidden";
     score = 0;
     yourScore.textContent = "0";
+    this.intervalId = setInterval(() => {
+      snake.move();
+    }, 100);
   }
 
+  // BAD PRACTICE TO SETUP STYLE WITH HTML -> SHOULD BE WITH CLASS.
   endGame() {
     gameScreen.style.visibility = "hidden";
     startScreen.style.visibility = "hidden";
     gameOverScreen.style.visibility = "visible";
-    scoreGameOver.textContent = `YOU LOSE! YOUR SCORE IS ${score}`;
+    if (score < 5) {
+      scoreGameOver.textContent = `LOL. YOUR SCORE IS ${score}`;
+    } else if (score < 15) {
+      scoreGameOver.textContent = `COULD DO BETTER. YOUR SCORE IS ${score}`;
+    } else if (score < 15) {
+      scoreGameOver.textContent = `GOOD JOB! YOUR SCORE IS ${score}`;
+    }
+    clearInterval(this.intervalId);
   }
 
   incrementLiveScore() {
@@ -159,10 +171,6 @@ const food = new Food();
 
 // ----------------------------            ------------------------------------ //
 
-const intervalId = setInterval(() => {
-  snake.move();
-}, 100);
-
 function checkForGameOver() {
   // Check when the snake reach the border
   const isUp =
@@ -183,7 +191,7 @@ function checkForGameOver() {
     isDown // snake reached the bottom of the grid
   ) {
     board.endGame();
-    return clearInterval(intervalId);
+    return;
   }
 
   // Check if the snake reach its tail
@@ -193,7 +201,7 @@ function checkForGameOver() {
     })
   ) {
     board.endGame();
-    return clearInterval(intervalId);
+    return;
   }
 }
 
@@ -222,12 +230,11 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// START THE GAME
 startButton.addEventListener("click", board.startGame);
 
-// TO-DO
-
-// OPITMISATIONS
-// Clean the code (snake.snakePositon for example)
+// RESTART THE GAME
+restartButton.addEventListener("click", board.startGame);
 
 // 11:00 -> https://www.youtube.com/watch?v=rui2tRRVtc0 ALL CONDITIONS
 // https://www.youtube.com/watch?v=TAmYp4jKWoM
