@@ -1,9 +1,14 @@
+// SELECTORS TO LET THE USER PLAY
 const gridContainer = document.querySelector(".grid");
-const yourScore = document.querySelector("#your-score-number")
-let gameOver = false;
-let score = 0;
+const yourScore = document.querySelector("#your-score-number");
+const startButton = document.querySelector("#start-btn");
+const startScreen = document.querySelector(".start-screen");
+const gameScreen = document.querySelector("main");
+const gameOverScreen = document.querySelector(".game-over-screen");
+const scoreGameOver = document.querySelector(".game-over-screen h2");
 
-// //FUNCTION START THE GAME
+// INITIAL VALUES FOR THE GAME
+let score = 0;
 
 // ---------------------------- GAMEBOARD CLASS ------------------------------------ //
 
@@ -15,7 +20,6 @@ class GameBoard {
     this.allCells = this.generateCells();
   }
 
-  // Generate all the cells
   generateCells() {
     const gridSize = this.width * this.height;
     const allCells = [];
@@ -25,7 +29,6 @@ class GameBoard {
 
       oneCell.classList.add("cell");
       oneCell.dataset.index = i;
-      oneCell.textContent = i; // remove later
 
       gridContainer.appendChild(oneCell);
 
@@ -34,22 +37,32 @@ class GameBoard {
     return allCells;
   }
 
+  startGame() {
+    gameScreen.style.visibility = "visible";
+    startScreen.style.visibility = "hidden";
+    score = 0;
+    yourScore.textContent = "0";
+  }
+
+  endGame() {
+    gameScreen.style.visibility = "hidden";
+    startScreen.style.visibility = "hidden";
+    gameOverScreen.style.visibility = "visible";
+    scoreGameOver.textContent = `YOU LOSE! YOUR SCORE IS ${score}`;
+  }
+
   incrementLiveScore() {
-      yourScore.textContent = score
+    yourScore.textContent = score;
   }
 }
 
-const board = new GameBoard(10, 10);
-
-function incrementLiveScore() {
-    yourScore.textContent = score
-}
+const board = new GameBoard(20, 20);
 
 // ---------------------------- SNAKE CLASS ------------------------------------ //
 
 class Snake {
   constructor() {
-    this.snakePositions = [51, 52, 53];
+    this.snakePositions = [62, 63, 64];
     this.snakeHeadPosition = this.snakePositions.slice(-1)[0];
     this.tailPosition = this.snakePositions[0];
     this.direction = "right";
@@ -101,7 +114,7 @@ class Snake {
       food.hide();
       food.generateNew();
       score += 1;
-      board.incrementLiveScore()
+      board.incrementLiveScore();
       this.snakePositions.unshift(this.tailPosition);
     }
   }
@@ -148,7 +161,7 @@ const food = new Food();
 
 const intervalId = setInterval(() => {
   snake.move();
-}, 500);
+}, 200);
 
 function checkForGameOver() {
   // Check when the snake reach the border
@@ -169,7 +182,7 @@ function checkForGameOver() {
     isLeft || // snake reaches the left side of the grid
     isDown // snake reached the bottom of the grid
   ) {
-    gridContainer.classList.add("hide");
+    board.endGame();
     return clearInterval(intervalId);
   }
 
@@ -179,7 +192,7 @@ function checkForGameOver() {
       return cell === snake.snakeHeadPosition;
     })
   ) {
-    gridContainer.classList.add("hide");
+    board.endGame();
     return clearInterval(intervalId);
   }
 }
@@ -209,8 +222,9 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+startButton.addEventListener("click", board.startGame);
+
 // TO-DO
-// 2.a - Get the food position randomly outside SnakeArray
 
 // OPITMISATIONS
 // Clean the code (snake.snakePositon for example)

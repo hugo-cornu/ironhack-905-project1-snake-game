@@ -10,17 +10,34 @@
 
   <body>
     <main>
+      <!-- <img src="./images/snake.png" alt="Snake Image" class="snake-img">  -->
       <div>RESTART</div>
+
       <div class="grid"></div>
+
       <div class="your-score">
         <div id="#your-score-text">SCORE</div>
-        <div id="your-score-number">00</div>
+        <div id="your-score-number">0</div>
       </div>
     </main>
 
+    <!-- MODAL SCREEN - WELCOME PAGE -->
+    <div class="start-screen">
+      <h2>WELCOME TO MY SNAKE GAME!</h2>
+      <button id="start-btn">START THE GAME</button>
+    </div>
+    <!-- MODAL SCREEN - WELCOME PAGE -->
+
+    <!-- MODAL SCREEN - GAME OVER -->
+    <div class="game-over-screen">
+      <h2>YOU LOOSE! YOUR SCORE IS 0</h2>
+      <button id="restart-btn">RESTART THE GAME</button>
+    </div>
+    <!-- MODAL SCREEN - GAME OVER -->
+
     <footer>
       <div id="footer-snake" class="page-style">SNAKE</div>
-      <div id="footer-author" class="page-style">by Hugo</div>
+      <div id="footer-author" class="page-style">by Hugo Cornu</div>
     </footer>
     <script src="./js/food.js"></script>
     <script src="./js/snake.js"></script>

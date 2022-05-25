@@ -1,3 +1,5 @@
+/* ----------- PAGE STYLE ----------- */
+
 * {
   box-sizing: border-box;
   color: white;
@@ -7,62 +9,52 @@ html {
   background-color: rgba(34, 32, 32, 0.953);
 }
 
-/* ----------- GAME STYLE ----------- */
-
-.grid {
-  border: 1px solid pink;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 602px;
-  height: 600px;
-}
-
-.grid.hide {
-  visibility: hidden;
-}
-
-.cell {
-  color: white;
-  border: 0.1px solid white;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
-}
-
-.snake {
-  background-color: blue;
-}
-
-.snake-head {
-  background-color: blue;
-}
-
-.food {
-  background-color: aqua;
-}
-
-/* ----------- PAGE STYLE ----------- */
-
 body {
-    margin-top: 50px ;
+  margin-top: 50px;
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3em;
-}
-
-.your-score {
+.start-screen {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 100px 200px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1em;
+  gap: 2em;
+  visibility: visible;
 }
+
+.game-over-screen {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 100px 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    visibility: hidden;
+  }
+
+.start-screen h2 {
+    text-align: center;
+}
+
+button {
+    background: none;
+    padding: 14px
+}
+
+/*.snake-img {
+     height: 300px;
+     width: auto;
+     margin-right: 50px;
+ }*/
 
 footer {
   display: flex;
@@ -79,4 +71,52 @@ footer {
 
 #footer-author {
   font-size: 1.3em;
+}
+
+/* ----------- GAME STYLE ----------- */
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  visibility: hidden;
+}
+
+.your-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.grid {
+  border: 1px solid pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 602px;
+  height: 600px;
+}
+
+.cell {
+  color: white;
+  border: 0.1px solid white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+}
+
+.snake {
+  background-color: blue;
+}
+
+.snake-head {
+  background-color: blue;
+}
+
+.food {
+  background-color: aqua;
 }
