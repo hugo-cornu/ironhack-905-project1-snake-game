@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <main>
+    <main class="hidden">
       <!-- <img src="./images/snake.png" alt="Snake Image" class="snake-img">  -->
       <div>RESTART</div>
 
@@ -29,7 +29,7 @@
     <!-- MODAL SCREEN - WELCOME PAGE -->
 
     <!-- MODAL SCREEN - GAME OVER -->
-    <div class="game-over-screen">
+    <div class="game-over-screen hidden">
       <h2>OUTCH!</h2>
       <button id="restart-btn">RESTART THE GAME</button>
     </div>
@@ -39,6 +39,8 @@
       <div id="footer-snake" class="page-style">SNAKE</div>
       <div id="footer-author" class="page-style">by Hugo Cornu</div>
     </footer>
+
+    <audio id="audio" src=".""></audio>
     <script src="./js/food.js"></script>
     <script src="./js/snake.js"></script>
     <script src="./js/main.js"></script>

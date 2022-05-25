@@ -10,6 +10,10 @@ const scoreGameOver = document.querySelector(".game-over-screen h2");
 
 // INITIAL VALUES FOR THE GAME
 let score = 0;
+let board = null; //new GameBoard(20, 20);
+let food = null; //new Food();
+let snake = null; //new Snake();
+// snake.drawSnake();
 
 // ---------------------------- GAMEBOARD CLASS ------------------------------------ //
 
@@ -39,10 +43,16 @@ class GameBoard {
   }
 
   startGame() {
-    gameScreen.style.visibility = "visible";
-    startScreen.style.visibility = "hidden";
+    // gameScreen.style.visibility = "visible";
+    gameScreen.classList.remove("hidden");
+    // startScreen.style.visibility = "hidden";
+    startScreen.classList.add("hidden");
+    // gameOverScreen.style.visibility = "hidden";
+    gameOverScreen.classList.add("hidden");
+
     score = 0;
     yourScore.textContent = "0";
+
     this.intervalId = setInterval(() => {
       snake.move();
     }, 100);
@@ -50,9 +60,11 @@ class GameBoard {
 
   // BAD PRACTICE TO SETUP STYLE WITH HTML -> SHOULD BE WITH CLASS.
   endGame() {
-    gameScreen.style.visibility = "hidden";
-    startScreen.style.visibility = "hidden";
-    gameOverScreen.style.visibility = "visible";
+    // gameScreen.style.visibility = "hidden";
+    gameScreen.classList.add("hidden");
+    // startScreen.style.visibility = "hidden";
+    // gameOverScreen.style.visibility = "visible";
+    gameOverScreen.classList.remove("hidden");
     if (score < 5) {
       scoreGameOver.textContent = `LOL. YOUR SCORE IS ${score}`;
     } else if (score < 15) {
@@ -67,8 +79,6 @@ class GameBoard {
     yourScore.textContent = score;
   }
 }
-
-const board = new GameBoard(20, 20);
 
 // ---------------------------- SNAKE CLASS ------------------------------------ //
 
@@ -132,9 +142,6 @@ class Snake {
   }
 }
 
-const snake = new Snake();
-snake.drawSnake();
-
 // ---------------------------- FOOD CLASS ------------------------------------ //
 
 class Food {
@@ -166,7 +173,6 @@ class Food {
   }
 }
 
-const food = new Food();
 // food.draw(); // Should be called when the game starts
 
 // ----------------------------            ------------------------------------ //
@@ -205,6 +211,15 @@ function checkForGameOver() {
   }
 }
 
+function startTheGame() {
+  gridContainer.innerHTML = "";
+  board = new GameBoard(20, 20);
+  food = new Food();
+  snake = new Snake();
+  snake.drawSnake();
+  board.startGame();
+}
+
 // ---------------------------- EVENTS LISTENER ------------------------------------ //
 
 window.addEventListener("keydown", (e) => {
@@ -231,10 +246,10 @@ window.addEventListener("keydown", (e) => {
 });
 
 // START THE GAME
-startButton.addEventListener("click", board.startGame);
+startButton.addEventListener("click", startTheGame);
 
 // RESTART THE GAME
-restartButton.addEventListener("click", board.startGame);
+restartButton.addEventListener("click", startTheGame);
 
 // 11:00 -> https://www.youtube.com/watch?v=rui2tRRVtc0 ALL CONDITIONS
 // https://www.youtube.com/watch?v=TAmYp4jKWoM

@@ -24,32 +24,30 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  visibility: visible;
   text-align: center;
 }
 
 .game-over-screen {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 100px 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
-    visibility: hidden;
-    text-align: center;
-  }
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 100px 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  text-align: center;
+}
 
 .start-screen h2 {
-    text-align: center;
+  text-align: center;
 }
 
 button {
-    background: none;
-    padding: 14px
+  background: none;
+  padding: 14px;
 }
 
 /*.snake-img {
@@ -59,6 +57,10 @@ button {
  }*/
 
 footer {
+  position: fixed;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +84,6 @@ main {
   justify-content: center;
   align-items: center;
   gap: 3em;
-  visibility: hidden;
 }
 
 .your-score {
@@ -121,4 +122,8 @@ main {
 
 .food {
   background-color: aqua;
+}
+
+.hidden {
+  display: none;
 }
