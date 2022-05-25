@@ -62,7 +62,7 @@ const board = new GameBoard(20, 20);
 
 class Snake {
   constructor() {
-    this.snakePositions = [62, 63, 64];
+    this.snakePositions = [201, 202, 203];
     this.snakeHeadPosition = this.snakePositions.slice(-1)[0];
     this.tailPosition = this.snakePositions[0];
     this.direction = "right";
@@ -161,7 +161,7 @@ const food = new Food();
 
 const intervalId = setInterval(() => {
   snake.move();
-}, 200);
+}, 100);
 
 function checkForGameOver() {
   // Check when the snake reach the border
