@@ -47,7 +47,10 @@ footer {
 
 #sound-btn {
   position: fixed;
-  top: 40px;
+  top: 15px;
+  right: 0;
+  margin-right: 40px;
+  margin-top: 10px;
   display: inline-block;
   padding: 6px 9px;
   border-radius: 4px;
@@ -73,7 +76,7 @@ footer {
   transform: translate(-50%, -50%);
   border: 1px solid white;
   border-radius: 5px;
-  padding: 50px 200px;
+  /* padding: 20px 200px; */
   display: flex;
   flex-direction: column;
   gap: 2em;
@@ -87,18 +90,19 @@ footer {
   font-size: 2.4em;
   letter-spacing: 5px;
   line-height: 1.4em;
+  padding: 20px 120px 0px;
 }
 
 #start-btn,
 #restart-btn {
   position: relative;
-  padding: 20px 10px;
+  padding: 18px 40px;
   border-radius: 4px;
   color: #bde3c6;
   font-weight: bold;
   font-size: 1em;
   text-decoration: none;
-  margin: 15px;
+  margin: 0px auto 40px;
   border: 2px solid rgba(78, 227, 18, 0.953);
   background: none;
   cursor: pointer;
@@ -157,7 +161,8 @@ main {
   width: 512px;
   height: 510px;
   flex-basis: auto;
-  margin-top: 70px;
+  margin-top: 30px;
+  margin-bottom: 70px;
 }
 
 .cell {
@@ -210,7 +215,7 @@ main {
   transform: translate(-50%, -50%);
   border: 1px solid white;
   border-radius: 5px;
-  padding: 100px 200px;
+  padding: 20px 120px 0px;
   display: flex;
   flex-direction: column;
   gap: 2em;
