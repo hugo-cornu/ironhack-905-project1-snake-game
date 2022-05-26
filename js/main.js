@@ -14,10 +14,15 @@ const restartButton = document.querySelector("#restart-btn");
 
 // SELECTORS – AUDIO
 const soundButton = document.querySelector("#sound-btn");
+
 const audioWelcomePage = document.querySelector("#audio-welcome");
 audioWelcomePage.volume = 0.35;
+
 const audioPoint = document.querySelector("#audio-point");
 audioPoint.volume = 0.1;
+
+const gameOverSound = document.querySelector("#audio-game-over");
+gameOverSound.volume = 0.2;
 
 // INITIAL VALUES FOR THE GAME
 let score = 0;
@@ -54,15 +59,14 @@ class GameBoard {
   }
 
   startGame() {
-    // gameScreen.style.visibility = "visible";
     gameScreen.classList.remove("hidden");
-    // startScreen.style.visibility = "hidden";
     startScreen.classList.add("hidden");
-    // gameOverScreen.style.visibility = "hidden";
     gameOverScreen.classList.add("hidden");
 
     score = 0;
     yourScore.textContent = "0";
+
+    audioWelcomePage.play();
 
     this.intervalId = setInterval(() => {
       snake.move();
@@ -215,6 +219,9 @@ function checkForGameOver() {
     isDown // snake reached the bottom of the grid
   ) {
     board.endGame();
+    audioWelcomePage.pause();
+    gameOverSound.play();
+
     return;
   }
 

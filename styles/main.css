@@ -34,12 +34,15 @@ footer {
 
 #footer-snake {
   font-family: "Luckiest Guy", cursive;
-  font-size: 3em;
+  font-size: 3rem;
   color: rgba(78, 227, 18, 0.953);
+  padding-top: 0.8rem;
 }
 
 #footer-author {
   font-size: 1.3em;
+  font-weight: bold;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 #sound-btn {
@@ -55,8 +58,10 @@ footer {
   font-family: "Roboto", sans-serif;
   filter: hue-rotate(0deg);
   border: 1px solid rgba(255, 255, 255, 0.953);
+  box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.953);
   transition: all 0.1s linear;
   background: none;
+  cursor: pointer;
 }
 
 /* ----------- WELCOME PAGE ----------- */
@@ -73,6 +78,7 @@ footer {
   flex-direction: column;
   gap: 2em;
   text-align: center;
+  box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.953);
 }
 
 .start-screen h2 {
@@ -86,18 +92,23 @@ footer {
 #start-btn,
 #restart-btn {
   position: relative;
-  display: inline-block;
   padding: 20px 10px;
   border-radius: 4px;
-  color: #adecbc;
+  color: #bde3c6;
+  font-weight: bold;
+  font-size: 1em;
   text-decoration: none;
-  overflow: hidden;
   margin: 15px;
-  filter: hue-rotate(0deg);
   border: 2px solid rgba(78, 227, 18, 0.953);
-  transition: all 0.1s linear;
   background: none;
   cursor: pointer;
+  transition-duration: 400ms;
+}
+
+#start-btn:hover,
+#restart-btn:hover {
+  color: rgba(78, 227, 18, 0.953);
+  box-shadow: 0px 0px 2px 1px rgba(0, 255, 4, 0.953);
 }
 
 /* ----------- GAME PAGE  ----------- */
@@ -178,6 +189,16 @@ main {
   opacity: 1;
   border: none;
   box-shadow: 0px 0px 10px 2px rgba(0, 255, 4, 0.953);
+  animation: shadow-box 300ms ease-in infinite alternate;
+}
+
+@keyframes shadow-box {
+  0% {
+    box-shadow: 0px 0px 10px 2px rgba(0, 255, 4, 0.953);
+  }
+  100% {
+    box-shadow: 0px 0px 8px 5px rgba(0, 255, 4, 0.953);
+  }
 }
 
 /* ----------- GAME OVER SCREEN ----------- */
@@ -194,6 +215,11 @@ main {
   flex-direction: column;
   gap: 2em;
   text-align: center;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  line-height: 2.4rem;
+  word-spacing: 0.2rem;
 }
 
 .hidden {
