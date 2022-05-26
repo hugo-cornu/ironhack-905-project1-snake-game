@@ -6,48 +6,11 @@
 }
 
 html {
-  background-color: rgba(34, 32, 32, 0.953);
+  background-color: rgba(0, 0, 0, 0.953);
 }
 
 body {
   margin-top: 50px;
-}
-
-.start-screen {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 100px 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  text-align: center;
-}
-
-.game-over-screen {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 100px 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  text-align: center;
-}
-
-.start-screen h2 {
-  text-align: center;
-}
-
-button {
-  background: none;
-  padding: 14px;
 }
 
 /*.snake-img {
@@ -65,25 +28,91 @@ footer {
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 17px;
   gap: 1.6em;
 }
 
 #footer-snake {
+  font-family: "Luckiest Guy", cursive;
   font-size: 3em;
+  color: rgba(78, 227, 18, 0.953);
 }
 
 #footer-author {
   font-size: 1.3em;
 }
 
-/* ----------- GAME STYLE ----------- */
+#sound-btn {
+  position: fixed;
+  top: 40px;
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 4px;
+  color: #adecbc;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  font-family: "Roboto", sans-serif;
+  filter: hue-rotate(0deg);
+  border: 1px solid rgba(255, 255, 255, 0.953);
+  transition: all 0.1s linear;
+  background: none;
+}
+
+/* ----------- WELCOME PAGE ----------- */
+
+.start-screen {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 50px 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  text-align: center;
+}
+
+.start-screen h2 {
+  text-align: center;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 2.4em;
+  letter-spacing: 5px;
+  line-height: 1.4em;
+}
+
+#start-btn,
+#restart-btn {
+  position: relative;
+  display: inline-block;
+  padding: 20px 10px;
+  border-radius: 4px;
+  color: #adecbc;
+  text-decoration: none;
+  overflow: hidden;
+  margin: 15px;
+  filter: hue-rotate(0deg);
+  border: 2px solid rgba(78, 227, 18, 0.953);
+  transition: all 0.1s linear;
+  background: none;
+  cursor: pointer;
+}
+
+/* ----------- GAME PAGE  ----------- */
 
 main {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left-column-gameBoard {
+  flex-basis: 25%;
 }
 
 .your-score {
@@ -91,37 +120,80 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 1em;
+  flex-basis: 25%;
+}
+
+#your-score-text {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 2.4em;
+  letter-spacing: 3px;
+  line-height: 1.4em;
+}
+
+#your-score-number {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 2.4em;
+  letter-spacing: 3px;
+  line-height: 1.4em;
 }
 
 .grid {
-  border: 1px solid pink;
+  border: 1px solid rgba(78, 227, 18, 0.953);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 602px;
-  height: 600px;
+  width: 512px;
+  height: 510px;
+  flex-basis: auto;
+  margin-top: 70px;
 }
 
 .cell {
   color: white;
+  opacity: 0.2;
   border: 0.1px solid white;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
 }
 
 .snake {
-  background-color: blue;
+  background-color: rgba(37, 95, 30, 0.953);
+  opacity: 1;
+  border: none;
 }
 
 .snake-head {
-  background-color: blue;
+  background-color: rgba(17, 223, 20, 0.953);
+  opacity: 1;
+  border: none;
+  box-shadow: 0px 0px 10px 2px rgba(0, 255, 4, 0.953);
+  border-radius: 2px;
 }
 
 .food {
-  background-color: aqua;
+  background-color: rgba(72, 255, 0, 0.953);
+  opacity: 1;
+  border: none;
+  box-shadow: 0px 0px 10px 2px rgba(0, 255, 4, 0.953);
+}
+
+/* ----------- GAME OVER SCREEN ----------- */
+
+.game-over-screen {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 100px 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  text-align: center;
 }
 
 .hidden {

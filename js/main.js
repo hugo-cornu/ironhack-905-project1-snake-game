@@ -1,12 +1,23 @@
-// SELECTORS TO LET THE USER PLAY
+// SELECTORS – WELCOME PAGE
+const startScreen = document.querySelector(".start-screen");
+const startButton = document.querySelector("#start-btn");
+
+// SELECTORS – GAME PAGE
+const gameScreen = document.querySelector("main");
 const gridContainer = document.querySelector(".grid");
 const yourScore = document.querySelector("#your-score-number");
-const startButton = document.querySelector("#start-btn");
-const restartButton = document.querySelector("#restart-btn");
-const startScreen = document.querySelector(".start-screen");
-const gameScreen = document.querySelector("main");
+
+// SELECTORS – GAME OVER PAGE
 const gameOverScreen = document.querySelector(".game-over-screen");
 const scoreGameOver = document.querySelector(".game-over-screen h2");
+const restartButton = document.querySelector("#restart-btn");
+
+// SELECTORS – AUDIO
+const soundButton = document.querySelector("#sound-btn");
+const audioWelcomePage = document.querySelector("#audio-welcome");
+audioWelcomePage.volume = 0.35;
+const audioPoint = document.querySelector("#audio-point");
+audioPoint.volume = 0.1;
 
 // INITIAL VALUES FOR THE GAME
 let score = 0;
@@ -69,7 +80,7 @@ class GameBoard {
       scoreGameOver.textContent = `LOL. YOUR SCORE IS ${score}`;
     } else if (score < 15) {
       scoreGameOver.textContent = `COULD DO BETTER. YOUR SCORE IS ${score}`;
-    } else if (score < 15) {
+    } else if (score > 15) {
       scoreGameOver.textContent = `GOOD JOB! YOUR SCORE IS ${score}`;
     }
     clearInterval(this.intervalId);
@@ -95,9 +106,15 @@ class Snake {
   }
 
   drawSnake() {
-    this.snakePositions.forEach((index) => {
-      board.allCells[index]?.classList.add("snake");
+    this.snakePositions.forEach((index, indexInSnakePosition) => {
+      if (indexInSnakePosition === this.snakePositions.length - 1) {
+        board.allCells[index]?.classList.add("snake-head");
+      } else {
+        board.allCells[index]?.classList.remove("snake-head");
+        board.allCells[index]?.classList.add("snake");
+      }
     });
+    this.snakePositions.forEach((div, i) => board.allCells[div].classList);
   }
 
   hideLastPosition() {
@@ -133,6 +150,7 @@ class Snake {
 
   checkForFood() {
     if (this.snakeHeadPosition === Number(food.position.dataset.index)) {
+      audioPoint.play();
       food.hide();
       food.generateNew();
       score += 1;
@@ -213,7 +231,7 @@ function checkForGameOver() {
 
 function startTheGame() {
   gridContainer.innerHTML = "";
-  board = new GameBoard(20, 20);
+  board = new GameBoard(15, 15);
   food = new Food();
   snake = new Snake();
   snake.drawSnake();
@@ -250,6 +268,16 @@ startButton.addEventListener("click", startTheGame);
 
 // RESTART THE GAME
 restartButton.addEventListener("click", startTheGame);
+
+// SOUND ON
+window.addEventListener("load", () => {
+  audioWelcomePage.play();
+});
+
+// SOUND OFF
+soundButton.addEventListener("click", () => {
+  audioWelcomePage.pause();
+});
 
 // 11:00 -> https://www.youtube.com/watch?v=rui2tRRVtc0 ALL CONDITIONS
 // https://www.youtube.com/watch?v=TAmYp4jKWoM

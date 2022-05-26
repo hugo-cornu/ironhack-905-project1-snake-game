@@ -6,17 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <main class="hidden">
-      <!-- <img src="./images/snake.png" alt="Snake Image" class="snake-img">  -->
-      <div>RESTART</div>
-
+      <div class="left-column-gameBoard"></div>
       <div class="grid"></div>
-
       <div class="your-score">
-        <div id="#your-score-text">SCORE</div>
+        <div id="your-score-text">SCORE</div>
         <div id="your-score-number">0</div>
       </div>
     </main>
@@ -24,23 +27,37 @@
     <!-- MODAL SCREEN - WELCOME PAGE -->
     <div class="start-screen">
       <h2>WELCOME TO MY SNAKE GAME!</h2>
-      <button id="start-btn">START THE GAME</button>
+      <button id="start-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>START THE GAME
+      </button>
     </div>
     <!-- MODAL SCREEN - WELCOME PAGE -->
 
-    <!-- MODAL SCREEN - GAME OVER -->
+    <!-- MODAL SCREEN - GAME OVER PAGE-->
     <div class="game-over-screen hidden">
       <h2>OUTCH!</h2>
-      <button id="restart-btn">RESTART THE GAME</button>
+      <button id="restart-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>RESTART THE GAME
+      </button>
     </div>
-    <!-- MODAL SCREEN - GAME OVER -->
+    <!-- MODAL SCREEN - GAME OVER PAGE -->
 
     <footer>
       <div id="footer-snake" class="page-style">SNAKE</div>
       <div id="footer-author" class="page-style">by Hugo Cornu</div>
+      <button id="sound-btn">
+        <img src="./images/white-mute-icon.png" alt="" />
+      </button>
     </footer>
 
-    <audio id="audio" src=".""></audio>
+    <audio id="audio-welcome" src="./audio/Welcome-suspens.mp3"></audio>
+    <audio id="audio-point" src="./audio/point-sound.wav"></audio>
     <script src="./js/food.js"></script>
     <script src="./js/snake.js"></script>
     <script src="./js/main.js"></script>
