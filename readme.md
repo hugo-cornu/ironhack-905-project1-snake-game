@@ -17,3 +17,5 @@ Snake is also very playable by definition then I was thinking it could be nice t
 - Setup a local "Best Score" as the game is not linked to a database.
 - Clean my code and structure it with different JS files.
 - Setup different gameplay options like the possibility to go through the wall, put obstacles on the grid or rise/decrease the snake speed.
+
+## [Link to test the game](https://hugo-cornu.github.io/snake-game/)
