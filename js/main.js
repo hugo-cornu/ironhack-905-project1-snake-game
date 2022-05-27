@@ -29,7 +29,6 @@ let score = 0;
 let board = null; //new GameBoard(20, 20);
 let food = null; //new Food();
 let snake = null; //new Snake();
-// snake.drawSnake();
 
 // ---------------------------- GAMEBOARD CLASS ------------------------------------ //
 
@@ -73,12 +72,8 @@ class GameBoard {
     }, 100);
   }
 
-  // BAD PRACTICE TO SETUP STYLE WITH HTML -> SHOULD BE WITH CLASS.
   endGame() {
-    // gameScreen.style.visibility = "hidden";
     gameScreen.classList.add("hidden");
-    // startScreen.style.visibility = "hidden";
-    // gameOverScreen.style.visibility = "visible";
     gameOverScreen.classList.remove("hidden");
     if (score < 5) {
       scoreGameOver.textContent = `LOL. YOUR SCORE IS ${score}`;
@@ -118,7 +113,6 @@ class Snake {
         board.allCells[index]?.classList.add("snake");
       }
     });
-    this.snakePositions.forEach((div, i) => board.allCells[div].classList);
   }
 
   hideLastPosition() {
@@ -232,6 +226,7 @@ function checkForGameOver() {
     })
   ) {
     board.endGame();
+    gameOverSound.play();
     return;
   }
 }
